@@ -6,12 +6,9 @@
           <th scope="col">Ticker</th>
           <th scope="col">Nombre</th>
           <th scope="col">Sector</th>
-          <th scope="col">Valor</th>
           <th scope="col">Cotiza</th>
-          <th scope="col">Valor Actual</th>
-          <th scope="col">Valor Anterior</th>
-          <th scope="col">Valor Anterior</th>
-          <th scope="col">Acción</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +24,10 @@
                 Modificar
               </button>
             </router-link>
-            <button class="btn btn-danger btn-sm" @click="deleteTicker(id)">
+            <button class="btn btn-warning btn-sm" @click="updateCierresBVL(ticker)">
+              Actualizar Cierres
+            </button>
+            <button disabled class="btn btn-danger btn-sm" @click="deleteTicker(id)">
               Eliminar
             </button>
           </td>
@@ -40,11 +40,12 @@
 <script>
 
 import { useLoadTickers, deleteTicker } from '@/firebase'
+import { updateCierresBVL } from '@/bvlHelper'
 
 export default {
   setup() {
     const tickers = useLoadTickers()
-    return { tickers, deleteTicker }
+    return { tickers, deleteTicker, updateCierresBVL }
   }
 }
 </script>
