@@ -11,7 +11,12 @@
             <div class="uk-grid uk-grid-medium uk-child-width-1-2@s uk-child-width-1-3@m  uk-child-width-1-4@l uk-grid-match js-filter-ticker" data-uk-grid="masonry: true" data-uk-sortable="handle: .drag-icon">
                 
                 <!-- card companyName.charAt(0).toUpperCase() +  -->
+                
+                
                 <div v-for="{ id, sectorCode, sectorDescription, stock, fixedValues, companyCode, companyName, alphabet = companyName.charAt(0).toUpperCase() + '-index', cierres, cierreshoy} in tickers" v-bind:data-indexLetter="alphabet" :key="id" data-tags="">
+                    
+                    <Ticker v-bind:name="name" v-bind:stock="stock"></TckerRow>
+    
                     <div class="uk-card uk-card-small uk-card-default">
                         <div class="uk-card-header">
                             <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
@@ -110,7 +115,11 @@ const MyCustomObject = {}
 export {importTicker as newName, MyCustomObject}
 export default {
     name: 'TickersListView', // Name for visualization
-    components: { WidgetIndices }, // Declaration of local component
+    components: { WidgetIndices, TickerRow }, // Declaration of local component
+    props: [
+        'name',
+        'stock'
+    ],
     data() { // dynamic allways
         return {
             tickers: [],
@@ -121,7 +130,7 @@ export default {
         filteredTickers() {
             return this.tickers.filter(this.maxRow)
         }
-    }
+    },
     onCreated () {
         // instance of created [no children, no data]
     },
@@ -132,7 +141,6 @@ export default {
         // DO NOT USE
     },
     methods: {}
-  }
 }
 </script>
 
