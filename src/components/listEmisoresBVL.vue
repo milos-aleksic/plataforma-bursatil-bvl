@@ -106,22 +106,33 @@ import { importTicker } from '@/firebase'
 import { getDataOnDemand } from '@/bvlHelper'
 import { WidgetIndices } from './WidgetIndices'
 
+const MyCustomObject = {}
+export {importTicker as newName, MyCustomObject}
 export default {
-    components: { WidgetIndices },
-    data() {
+    name: 'TickersListView', // Name for visualization
+    components: { WidgetIndices }, // Declaration of local component
+    data() { // dynamic allways
         return {
-            tickers: this.getTickersBVL()
+            tickers: [],
+            maxRow: 10 
         }
     },
-    setup() {
-        return { importTicker }
-    },
-    methods: {
-        async getTickersBVL() {
-            this.tickers = await getDataOnDemand('EmisoresLocales')
-            console.log('this.tickers', this.tickers)
+    computed: {
+        filteredTickers() {
+            return this.tickers.filter(this.maxRow)
         }
     }
+    onCreated () {
+        // instance of created [no children, no data]
+    },
+    onMounted async () { // Component in DOM
+        this.tickers = await getDataOnDemand('EmisoresLocales')
+    }
+    setup() {
+        // DO NOT USE
+    },
+    methods: {}
+  }
 }
 </script>
 
