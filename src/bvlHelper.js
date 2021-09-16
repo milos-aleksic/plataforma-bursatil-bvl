@@ -42,15 +42,15 @@ export const getDataOnDemand = async (tipoFetch) => {
 
 
 export const appendTodayCierres = async (emisoresList) => {
-  const todayCierres = await fetchDataOnDemand('https://dataondemand.bvl.com.pe/v1/stock-quote/market', {sector:'', today:true, companyCode:'', inputCompany:''})
+  const todayCierres = await fetchDataOnDemand('https://dataondemand.bvl.com.pe/v1/stock-quote/market', {sector:'', today:false, companyCode:'', inputCompany:''})
   for (let i = todayCierres['content'].length - 1; i >= 0; i--) {
+    let cierresHoy = false
     const cierre = todayCierres['content'][i]
     if (emisoresList[cierre['companyCode']] != undefined) {
-
-  /*
-      if (emisoresList[cierre['companyCode']]['cierres'] === undefined) {
-        emisoresList[cierre['companyCode']]['cierres'] = []
-      }*/
+      if (cierre['last'] != undefined) {
+        cierresHoy = true
+      }
+      emisoresList[cierre['companyCode']]['cierreshoy'] = cierresHoy
       emisoresList[cierre['companyCode']]['cierres'].push(cierre)
     }
 

@@ -4,8 +4,6 @@
     <section class="uk-section uk-section-small uk-section-default uk-padding-remove-bottom">
         <div class="uk-container uk-container-expand uk-margin-large-bottom" data-uk-filter="target: .js-filter-ticker; animation: fade">
 
-            <WidgetIndices></WidgetIndices>
-
             <alpha-index></alpha-index>
             
             <div class="uk-grid uk-grid-medium uk-child-width-1-2@s uk-child-width-1-3@m  uk-child-width-1-4@l uk-grid-match js-filter-ticker" data-uk-grid="masonry: true" data-uk-sortable="handle: .drag-icon">
@@ -104,10 +102,8 @@
 
 import { importTicker } from '@/firebase'
 import { getDataOnDemand } from '@/bvlHelper'
-import { WidgetIndices } from './WidgetIndices'
 
 export default {
-    components: { WidgetIndices },
     data() {
         return {
             tickers: this.getTickersBVL()

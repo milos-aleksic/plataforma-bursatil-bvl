@@ -15,7 +15,13 @@ const routes = [
     path: '/plataforma',
     name: 'Plataforma',
     component: Plataforma
-  },  {
+  },
+  {
+    path: '/extapiadmin',
+    name: 'ExtApiAdmin',
+    component: ExtApiAdmin
+  },
+  {
     path: '/plataforma_admin',
     name: 'Plataforma - Admin',
     component: PlataformaAdmin
