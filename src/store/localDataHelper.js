@@ -16,80 +16,24 @@
 // https://dataondemand.bvl.com.pe/v1/issuers/companyCode/info
 // https://dataondemand.bvl.com.pe/v1/issuers/ // Locales con info
 
-import { differenceInMonths } from 'date-fns'
 
-import LastCierresStockMarketcachedFile from '@/store/localStorage/dailyUpdates/LastCierresStockMarket.json'
-// import 'cachedFile' from `@/store/dailyUpdates/${fileName}.json`
 
-// 'https://dataondemand.bvl.com.pe/v1/stock-market-presence/today'
-// export const LastCierresStockMarket = async (tipoFetch) => {
-//   return
-// }
+export const getDataLocalJson = async (nombre) => {
 
-export const getDataOnDemand = async (tipoFetch) => {
-
-  // // Revisar si hay copia local aceptable
-  // const fileName = LastCierresStockMarket
-
-  // console.log('cachedFile', cachedFle)
-  let url = ''
-  const data = {}
-
-  if (tipoFetch == 'EmisoresLocales') {
+  
+  if (nombre == 'EmisoresLocales') {
       url = 'https://dataondemand.bvl.com.pe/v1/issuers/search'
       data['firstLetter'] = ''
       data['sectorCode'] = ''
       data['companyName'] = ''
       const emisoresList = await fetchDataOnDemand(url, data)
       const emisoresListObj = {}
-      for (let i = emisoresList.length - 1; i >= 0; i--) {
+      for (var i = emisoresList.length - 1; i >= 0; i--) {
         emisoresList[i]['cierres'] = []
         emisoresListObj[emisoresList[i]['companyCode']] = emisoresList[i]
       }
 
       return await appendTodayCierres(emisoresListObj)
-  }
- 
-  if (tipoFetch == 'LastCierresStockMarket') {
-
-      if (LastCierresStockMarketcachedFile) {
-          const emisoresList = await LastCierresStockMarketcachedFile
-          const emisoresListArr = []
-          for (let i = emisoresList['content'].length - 1; i >= 0; i--) {
-            const emisor = emisoresList['content'][i]
-
-            // Con cierres de menos de 3 meses
-            if (emisor.last || 
-              (emisor.previous && differenceInMonths(new Date(), new Date(emisor.previousDate)) < 3)) {
-              emisoresListArr.push(emisor)
-            }
-
-          }
-
-          emisoresList['content'] = emisoresListArr
-          return emisoresList
-      } else {
-          url = 'https://dataondemand.bvl.com.pe/v1/stock-quote/market'
-          data['sector'] = ''
-          data['today'] = false
-          data['companyCode'] = ''
-          data['inputCompany'] = ''
-          const emisoresList = await fetchDataOnDemand(url, data)
-          const emisoresListArr = []
-          for (let i = emisoresList['content'].length - 1; i >= 0; i--) {
-            const emisor = emisoresList['content'][i]
-
-            // Con cierres de menos de 3 meses
-            if (emisor.last || 
-              (emisor.previous && differenceInMonths(new Date(), new Date(emisor.previousDate)) < 3)) {
-              emisoresListArr.push(emisor)
-            }
-
-          }
-
-          emisoresList['content'] = emisoresListArr
-          return emisoresList
-      }
   }
   
 }

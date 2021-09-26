@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import Plataforma from '@/views/Plataforma.vue'
 import PlataformaAdmin from '@/views/PlataformaAdmin.vue'
+import LastCierresStockMarketView from '@/views/LastCierresStockMarketView.vue'
 import TickerEdit from '@/views/TickerEdit.vue'
+import BuildTreeView from '@/views/BuildTreeView.vue'
 import Edit from '@/views/Edit.vue'
 
 const routes = [
@@ -17,19 +19,26 @@ const routes = [
     component: Plataforma
   },
   {
-    path: '/extapiadmin',
-    name: 'ExtApiAdmin',
-    component: ExtApiAdmin
+    path: '/lastcierres',
+    name: 'LastCierresStockMarketView',
+    component: LastCierresStockMarketView
   },
   {
     path: '/plataforma_admin',
     name: 'Plataforma - Admin',
     component: PlataformaAdmin
   },
+
   {
     path: '/tickeredit/:ticker',
     name: 'Editar :ticker',
     component: TickerEdit
+  },
+  
+  {
+    path: '/BuildTreeView',
+    name: 'BuildTreeView',
+    component: BuildTreeView
   },
   
   {

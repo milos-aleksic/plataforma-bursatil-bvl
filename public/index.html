@@ -1,36 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title>Plataforma Bursatil</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+        <title>Plataforma Bursatil</title>
 
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
 
-  </head>
-  <body class="bg-light">
-    <noscript>
-      <strong
-        >We're sorry but Plataforma Bursatil doesn't work
-        properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
-    </noscript>
-    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-      <div class="uk-grid" data-uk-grid-margin="">
-        <div class="uk-width-medium-1-1 uk-row-first">
-          <div id="app"></div>    
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+        <!-- Fonts Awesome -->
+        <script src="https://kit.fontawesome.com/109a96ade8.js" crossorigin="anonymous"></script>
+
+        <style type="text/css">
+
+            /* Uikit Override  */
+
+            /* Text  */
+
+            .uk-text-primary {
+                color: #328CC1;
+            }
+
+            .uk-background-primary {
+                background-color: #328CC1;
+            }
+            .uk-button-primary {
+                background-color: #328CC1;
+                color: #fff;
+                border: 1px solid transparent;
+            }
+
+            .uk-text-secondary {
+                color: #083C5D;
+            }
+            .uk-background-secondary {
+                background-color: #083C5D;
+            }
+            .uk-button-secondary {
+                background-color: #083C5D;
+                color: #fff;
+                border: 1px solid transparent;
+            }
+
+            .uk-text-alternative {
+                color: #D98310;
+            }
+            .uk-background-alternative {
+                background-color: #D98310;
+            }
+            .uk-button-alternative {
+                background-color: #D98310;
+                color: #1D2731;
+                border: 1px solid transparent;
+            }
+
+            .uk-text-danger {
+                color: #d51111 !important;
+            }
+            .uk-text-success {
+                color: #0b8124 !important;
+            }
+            .uk-text-gold-deco {
+                color: #D98310;
+            }
+            .uk-text-gold {
+                color: #e7c211;
+            }
+            /*  
+            083C5D Azul marino
+            328CC1 Celeste
+            D98310 Gold
+            1D2731 Black
+            */
+
+            .uk-progress.presencia {
+                height: 7px;
+            }
+            .uk-progress.uk-danger::-webkit-progress-value
+            {
+                background-color: #d51111;
+            }
+            .uk-progress.uk-danger {
+                border: 2px solid #d51111;
+            }
+
+            .uk-progress.uk-success::-webkit-progress-value 
+            {
+                background-color: #0b8124;
+            }
+            .uk-progress.uk-success {
+                border: 2px solid #0b8124;
+            }
+
+            .uk-progress.uk-primary::-ms-fill {
+                background-color: #328CC1;
+            }
+            .uk-progress.uk-primary {
+                border: 2px solid #328CC1;
+            }
+
+/*
+            .uk-progress.uk-danger::-webkit-progress-value,
+            .uk-progress.uk-danger::-moz-progress-bar,
+            .uk-progress.uk-danger::-ms-fill
+            {
+                background-color: #d51111;
+            }
+            .uk-progress.uk-danger {
+                border: 2px solid #d51111;
+            }
+
+            .uk-progress.uk-success::-webkit-progress-value,
+            .uk-progress.uk-success::-moz-progress-value,
+            .uk-progress.uk-success::-ms-progress-value,
+            .uk-progress.uk-success::-webkit-fill,
+            .uk-progress.uk-success::-moz-fill,
+            .uk-progress.uk-success::-ms-fill,
+            .uk-progress.uk-success::-webkit-progress-bar,
+            .uk-progress.uk-success::-moz-progress-bar,
+            .uk-progress.uk-success::-ms-progress-bar
+            {
+                background-color: #0b8124;
+            }
+            .uk-progress.uk-success {
+                border: 2px solid #0b8124;
+            }
+
+            .uk-progress.uk-primary::-webkit-progress-value,
+            .uk-progress.uk-primary::-moz-progress-value,
+            .uk-progress.uk-primary::-ms-progress-value,
+            .uk-progress.uk-primary::-webkit-fill,
+            .uk-progress.uk-primary::-moz-fill,
+            .uk-progress.uk-primary::-ms-fill,
+            .uk-progress.uk-primary::-webkit-progress-bar,
+            .uk-progress.uk-primary::-moz-progress-bar,
+            .uk-progress.uk-primary::-ms-progress-bar
+            {
+                background-color: #328CC1;
+            }
+            .uk-progress.uk-primary {
+                border: 2px solid #328CC1;
+            }
+
+*/
+        </style>
+
+    </head>
+    <body class="bg-light">
+        <noscript>
+          <strong>We're sorry but Plataforma Bursatil doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        </noscript>
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+            <div class="uk-grid" data-uk-grid-margin="">
+                <div class="uk-width-medium-1-1 uk-row-first">
+                    <div id="app"></div>    
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- built files will be auto injected -->
+        <!-- built files will be auto injected -->
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
-  </body>
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
+    </body>
 </html>

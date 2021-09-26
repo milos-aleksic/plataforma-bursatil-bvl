@@ -16,121 +16,100 @@
 // https://dataondemand.bvl.com.pe/v1/issuers/companyCode/info
 // https://dataondemand.bvl.com.pe/v1/issuers/ // Locales con info
 
-import { differenceInMonths } from 'date-fns'
+// import { format, differenceInMonths } from 'date-fns'
 
-import LastCierresStockMarketcachedFile from '@/store/localStorage/dailyUpdates/LastCierresStockMarket.json'
-// import 'cachedFile' from `@/store/dailyUpdates/${fileName}.json`
+export default {
+  name: 'dataOnDemand_Helper'
+}
 
-// 'https://dataondemand.bvl.com.pe/v1/stock-market-presence/today'
-// export const LastCierresStockMarket = async (tipoFetch) => {
-//   return
+
+// export const getDataOnDemand = async (tipoFetch) => {
+
+//   // // Revisar si hay copia local aceptable
+//   // const fileName = LastCierresStockMarket
+
+//   // import 'cachedFile' from `@/store/dailyUpdates/${fileName}.json`
+//   // console.log('cachedFile', cachedFle)
+//   let url = ''
+//   const data = {}
+
+//   if (tipoFetch == 'EmisoresLocales') {
+//       url = 'https://dataondemand.bvl.com.pe/v1/issuers/search'
+//       data['firstLetter'] = ''
+//       data['sectorCode'] = ''
+//       data['companyName'] = ''
+//       const emisoresList = await fetchDataOnDemand(url, data)
+//       const emisoresListObj = {}
+//       for (let i = emisoresList.length - 1; i >= 0; i--) {
+//         emisoresList[i]['cierres'] = []
+//         emisoresListObj[emisoresList[i]['companyCode']] = emisoresList[i]
+//       }
+
+//       return await appendTodayCierres(emisoresListObj)
+//   }
+ 
+//   if (tipoFetch == 'LastCierresStockMarket') {
+//       url = 'https://dataondemand.bvl.com.pe/v1/stock-quote/market'
+//       data['sector'] = ''
+//       data['today'] = false
+//       data['companyCode'] = ''
+//       data['inputCompany'] = ''
+//       const emisoresList = await fetchDataOnDemand(url, data)
+//       const emisoresListArr = []
+//       for (let i = emisoresList['content'].length - 1; i >= 0; i--) {
+//         const emisor = emisoresList['content'][i]
+
+//         // Con cierres de menos de 3 meses
+//         if (emisor.last || 
+//           (emisor.previous && differenceInMonths(new Date(), new Date(emisor.previousDate)) < 3)) {
+//           emisoresListArr.push(emisor)
+//         }
+
+//       }
+
+//       emisoresList['content'] = emisoresListArr
+//       return emisoresList
+//   }
+  
 // }
 
-export const getDataOnDemand = async (tipoFetch) => {
 
-  // // Revisar si hay copia local aceptable
-  // const fileName = LastCierresStockMarket
+// export const appendTodayCierres = async (emisoresList) => {
+//   const todayCierres = await fetchDataOnDemand('https://dataondemand.bvl.com.pe/v1/stock-quote/market', {sector:'', today:false, companyCode:'', inputCompany:''})
+//   for (let i = todayCierres['content'].length - 1; i >= 0; i--) {
+//     let cierresHoy = false
+//     const cierre = todayCierres['content'][i]
+//     if (emisoresList[cierre['companyCode']] != undefined) {
+//       if (cierre['last'] != undefined) {
+//         cierresHoy = true
+//       }
+//       emisoresList[cierre['companyCode']]['cierreshoy'] = cierresHoy
+//       emisoresList[cierre['companyCode']]['cierres'].push(cierre)
+//     }
 
-  // console.log('cachedFile', cachedFle)
-  let url = ''
-  const data = {}
+//   }
 
-  if (tipoFetch == 'EmisoresLocales') {
-      url = 'https://dataondemand.bvl.com.pe/v1/issuers/search'
-      data['firstLetter'] = ''
-      data['sectorCode'] = ''
-      data['companyName'] = ''
-      const emisoresList = await fetchDataOnDemand(url, data)
-      const emisoresListObj = {}
-      for (let i = emisoresList.length - 1; i >= 0; i--) {
-        emisoresList[i]['cierres'] = []
-        emisoresListObj[emisoresList[i]['companyCode']] = emisoresList[i]
-      }
+//   return emisoresList
 
-      return await appendTodayCierres(emisoresListObj)
-  }
- 
-  if (tipoFetch == 'LastCierresStockMarket') {
+// }
 
-      if (LastCierresStockMarketcachedFile) {
-          const emisoresList = await LastCierresStockMarketcachedFile
-          const emisoresListArr = []
-          for (let i = emisoresList['content'].length - 1; i >= 0; i--) {
-            const emisor = emisoresList['content'][i]
+// export const fetchDataOnDemand = async (url, data) => {
 
-            // Con cierres de menos de 3 meses
-            if (emisor.last || 
-              (emisor.previous && differenceInMonths(new Date(), new Date(emisor.previousDate)) < 3)) {
-              emisoresListArr.push(emisor)
-            }
+//   const myHeaders = new Headers()
+//   myHeaders.append("accept", "application/json, text/plain, */*")
+//   myHeaders.append("content-type", "application/json")
 
-          }
+//   const requestOptions = {
+//     method: 'POST',
+//     headers: myHeaders,
+//     body: JSON.stringify(data),
+//     redirect: 'follow'
+//   };
 
-          emisoresList['content'] = emisoresListArr
-          return emisoresList
-      } else {
-          url = 'https://dataondemand.bvl.com.pe/v1/stock-quote/market'
-          data['sector'] = ''
-          data['today'] = false
-          data['companyCode'] = ''
-          data['inputCompany'] = ''
-          const emisoresList = await fetchDataOnDemand(url, data)
-          const emisoresListArr = []
-          for (let i = emisoresList['content'].length - 1; i >= 0; i--) {
-            const emisor = emisoresList['content'][i]
+//   const rawResult = await fetch(url, requestOptions)
 
-            // Con cierres de menos de 3 meses
-            if (emisor.last || 
-              (emisor.previous && differenceInMonths(new Date(), new Date(emisor.previousDate)) < 3)) {
-              emisoresListArr.push(emisor)
-            }
-
-          }
-
-          emisoresList['content'] = emisoresListArr
-          return emisoresList
-      }
-  }
-  
-}
-
-
-export const appendTodayCierres = async (emisoresList) => {
-  const todayCierres = await fetchDataOnDemand('https://dataondemand.bvl.com.pe/v1/stock-quote/market', {sector:'', today:false, companyCode:'', inputCompany:''})
-  for (let i = todayCierres['content'].length - 1; i >= 0; i--) {
-    let cierresHoy = false
-    const cierre = todayCierres['content'][i]
-    if (emisoresList[cierre['companyCode']] != undefined) {
-      if (cierre['last'] != undefined) {
-        cierresHoy = true
-      }
-      emisoresList[cierre['companyCode']]['cierreshoy'] = cierresHoy
-      emisoresList[cierre['companyCode']]['cierres'].push(cierre)
-    }
-
-  }
-
-  return emisoresList
-
-}
-
-export const fetchDataOnDemand = async (url, data) => {
-
-  const myHeaders = new Headers()
-  myHeaders.append("accept", "application/json, text/plain, */*")
-  myHeaders.append("content-type", "application/json")
-
-  const requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: JSON.stringify(data),
-    redirect: 'follow'
-  };
-
-  const rawResult = await fetch(url, requestOptions)
-
-  return await rawResult.json()
-}
+//   return await rawResult.json()
+// }
 
 
 /*

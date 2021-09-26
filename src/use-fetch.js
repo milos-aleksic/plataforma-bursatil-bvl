@@ -1,11 +1,12 @@
-import {toRefs, reactive} from '@vue/composition-api';
 
 export default function(url, options) {
-  const state = reactive({
+  console.log('use-fetch')
+
+  const state = {
     response: [],
     error: null,
     fetching: false
-  });
+  }
   const fetchData = async () => {
     state.fetching = true;
     try {
@@ -18,5 +19,5 @@ export default function(url, options) {
       state.fetching = false;
     }
   };
-  return {...toRefs(state), fetchData};
+  return {state, fetchData};
 }
