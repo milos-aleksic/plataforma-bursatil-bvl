@@ -206,7 +206,7 @@
 
 
 import { buildDataTree } from '@/store/rentaVariableDataTree'
-import { requestData } from '@/store/fetchJsonData'
+// import { requestData } from '@/store/fetchJsonData'
 
 import UIkit from 'uikit'
 import { ref } from 'vue'
@@ -304,8 +304,8 @@ export default {
             }
         },
         async getJsonData() {
-            const tickersList = await requestData('StockQuoteMarket')
-            console.log(tickersList)
+            // const tickersList = await requestData('StockQuoteMarket')
+            // console.log(tickersList)
             // this.tickers = tickersList.content
             // this.totals = {
             //     up: tickersList.up,

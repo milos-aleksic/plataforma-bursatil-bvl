@@ -35,36 +35,6 @@ export const fetchDataOnDemandMiltek = async (url) => {
 }
 
 
-const getsourcePath = (keyword) =>  { // (valorNuevo, valorAntiguo)
-    let jsonPaths = []
-    // switch (varName)
-    // {
-    //    case "afshin":
-    //    case "saeed":
-    //    case "larry": 
-    //        alert('Hey');
-    //        break;
-
-    //    default: 
-    //        alert('Default case');
-    // }
-    switch (keyword)
-    {
-        case "StockQuoteMarket": 
-            jsonPaths = {
-                cached: 'https://storage.googleapis.com/bvl_open_api/diario/stock-quote-market/v1_stock-quote_market.json',
-                live: 'https://dataondemand.bvl.com.pe/v1/stock-quote/market'
-            }
-            break;
-
-        default: 
-            console.log('error with jsonPaths')
-    }
-
-        // https://dataondemand.bvl.com.pe/v1/stock-quote/market
-    return jsonPaths
-}
-
 const getPercentageDiff = (modifiedValue, baseValue) =>  { // (valorNuevo, valorAntiguo)
     const formuled = ((modifiedValue - baseValue) / modifiedValue) * 100 
     const percentNumber =parseFloat((formuled - (formuled * 2)).toFixed(2))
@@ -79,7 +49,7 @@ export const buildDataTree = async () => {
 
     // const baseData = await fetchDataOnDemandMiltek('https://storage.googleapis.com/bvl_open_api/diario/stock-quote-market/STOCK-QOUTE-MARKET_23-09-2021-02%3A31%3A45.json')
     // const baseData = await fetchDataOnDemandMiltek('https://www.npoint.io/docs/c151c4ce8a50ea2b3ffb')
-    const baseData = await fetchDataOnDemandMiltek(getsourcePath('StockQuoteMarket').live)
+    const baseData = await fetchDataOnDemandMiltek('https://storage.googleapis.com/bvl_open_api/diario/stock-quote-market/v1_stock-quote_market.json')
 
 
     const baseDataArray = await baseData['content']
