@@ -5,6 +5,7 @@ import PlataformaAdmin from '@/views/PlataformaAdmin.vue'
 import LastCierresStockMarketView from '@/views/LastCierresStockMarketView.vue'
 import TickerEdit from '@/views/TickerEdit.vue'
 import BuildTreeView from '@/views/BuildTreeView.vue'
+import DashBoardView from '@/modules/dashboard/views/DashBoardView.vue'
 import Edit from '@/views/Edit.vue'
 
 const routes = [
@@ -39,6 +40,12 @@ const routes = [
     path: '/BuildTreeView',
     name: 'BuildTreeView',
     component: BuildTreeView
+  },
+  
+  {
+    path: '/DashBoardView',
+    name: 'DashBoardView',
+    component: DashBoardView
   },
   
   {

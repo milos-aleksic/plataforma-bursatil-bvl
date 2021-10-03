@@ -35,6 +35,29 @@ export const fetchDataOnDemandMiltek = async (url) => {
 }
 
 
+export const getSpreadSheetApi = async () => {
+
+    // const baseData = await fetchDataOnDemandMiltek('https://storage.googleapis.com/bvl_open_api/diario/stock-quote-market/STOCK-QOUTE-MARKET_23-09-2021-02%3A31%3A45.json')
+    // const baseData = await fetchDataOnDemandMiltek('https://www.npoint.io/docs/c151c4ce8a50ea2b3ffb')
+    // https://spreadsheets.google.com/feeds/cells/YOURGOOGLESHEETCODE/SHEETPAGENUMBER/public/full?alt=json
+    // 'https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1!A:?majorDimension=COLUMNS&valueRenderOption=FORMULA'
+    // const jsonUrl = `https://spreadsheets.google.com/feeds/cells/${sheetId}/${sheetPage}/public/full?alt=json`
+
+    const spreadsheetId = '1ZRCXSF2YG68_BYxyCAWucRwvL1nY3gMEScSKonXPzhA'
+    const apiKeyGcp = 'AIzaSyDdWQxXkF5JkyZEnz83C9JxhJ24Bj32joI'
+
+    let dataFormat = ''
+    // dataFormat += 'majorDimension=ROWS&'
+    // dataFormat += 'valueRenderOption=FORMULA&'
+
+    const jsonUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Today_False!A:XX?${dataFormat}key=${apiKeyGcp}`
+    const baseData = await fetchDataOnDemandMiltek(jsonUrl)
+    console.log(baseData)
+    console.log(baseData['values'])
+    console.log(baseData.values)
+
+}
+
 const getPercentageDiff = (modifiedValue, baseValue) =>  { // (valorNuevo, valorAntiguo)
     const formuled = ((modifiedValue - baseValue) / modifiedValue) * 100 
     const percentNumber =parseFloat((formuled - (formuled * 2)).toFixed(2))
